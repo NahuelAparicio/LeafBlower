@@ -1,16 +1,26 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public PlayerMovement movement { get; set; }
+    public PlayerStats stats { get; set; }
+    public PlayerInputs inputs { get; set; }
+
+    private bool _isInteracting;
+
+
+    private void Awake()
+    {
+        movement = GetComponent<PlayerMovement>();
+        stats = GetComponent<PlayerStats>();
+        inputs = GetComponent<PlayerInputs>();
+    }
+
     void Start()
     {
         
     }
 
-    // Update is called once per frame
     void Update()
     {
         
