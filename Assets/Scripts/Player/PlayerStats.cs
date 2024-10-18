@@ -2,19 +2,13 @@ using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
 {
-    private float _speed;
+    [SerializeField]private float _speed;
     public float Speed { get { return _speed; } }
 
-    private bool _isInteracting;
-    public bool IsInteracting { get { return _isInteracting; } }
+    [SerializeField] private float _dashForce;
+    public float DashForce {  get { return _dashForce; } }
 
-    void Update()
-    {
-        
-    }
+    [SerializeField] private float _jumpForce;
+    public float JumpForce { get { return _jumpForce; } }
 
-    public void SetIsInteracting (bool interacted)
-    {
-        _isInteracting = interacted;
-    }
 }

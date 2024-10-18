@@ -7,15 +7,16 @@ public class PlayerController : MonoBehaviour
     public PlayerInputs inputs { get; set; }
     public PlayerInteractable interactable { get; set; }
 
-    private bool _isInteracting;
+    private Rigidbody _rb;
 
+    public Rigidbody Rigidbody { get {  return _rb; } }
 
     private void Awake()
     {
         movement = GetComponent<PlayerMovement>();
         stats = GetComponent<PlayerStats>();
         inputs = GetComponent<PlayerInputs>();
-        // interactable = get reference
+        interactable = transform.GetChild(1).GetComponent<PlayerInteractable>();
     }
 
     void Start()
