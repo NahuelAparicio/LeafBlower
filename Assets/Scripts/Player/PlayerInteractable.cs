@@ -4,17 +4,52 @@ using UnityEngine;
 
 public class PlayerInteractable : MonoBehaviour
 {
-    private PlayerController _player;
+    private List<GameObject> _touchingInteractables = new List<GameObject>();
 
-    private void Awake()
-    {
-        _player = transform.parent.GetComponent<PlayerController>();
-    }
+    public bool canInteract;
+
+    // Saves and deletes interacable objects of the list
     private void OnTriggerEnter(Collider other)
     {
-        if(_player.stats.IsInteracting)
+        if(other.gameObject.layer == LayerMask.NameToLayer("Interactable"))
         {
-            other.GetComponent<IInteractable>().OnInteract();
+            if(other.GetComponent<IInteractable>() != null)
+            {
+                canInteract = true;
+            }
+            if(!_touchingInteractables.Contains(other.gameObject))
+            {
+                _touchingInteractables.Add(other.gameObject);
+            }
+
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if(other.gameObject.layer == LayerMask.NameToLayer("Interactable"))
+        {
+            canInteract = false;
+            if(_touchingInteractables.Contains(other.gameObject))
+            {
+                _touchingInteractables.Remove(other.gameObject);
+            }
+        }
+    }
+
+    public void ClearInteractables() => _touchingInteractables.Clear();
+
+    // On Interact Button Performed checks interaction posibilities and intercts if it's possible
+    public void InteractPerformed()
+    {
+        foreach(var interactable in _touchingInteractables)
+        {
+            if(interactable != null)
+            {
+                var interaction = interactable.GetComponent<IInteractable>();
+                if (interaction == null) return;
+                interaction.OnInteract();
+            }
         }
     }
 }
