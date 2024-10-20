@@ -15,32 +15,6 @@ public class PlayerInputs : MonoBehaviour
     }
 
     public Vector2 GetMoveDirection() => _actions.Player.Move.ReadValue<Vector2>(); // Left Stick -- WASD
-    public Vector2 GetBlowerMoveDirection() => _actions.Player.BlowerMove.ReadValue<Vector2>(); // Right Stick -- Mouse Scroll
-
-    private void MoveLeftStick_performed(InputAction.CallbackContext context)
-    {
-
-    }
-    private void MoveBlower_performed(InputAction.CallbackContext context)
-    {
-
-    }
-    private void Blow_performed(InputAction.CallbackContext context)
-    {
-
-    }
-    private void Blow_canceled(InputAction.CallbackContext context)
-    {
-
-    }
-    private void Aspire_performed(InputAction.CallbackContext context)
-    {
-
-    }
-    private void Aspire_canceled(InputAction.CallbackContext context)
-    {
-
-    }
 
     private void Jump_performed(InputAction.CallbackContext context)
     {
@@ -49,7 +23,7 @@ public class PlayerInputs : MonoBehaviour
 
     private void Dash_performed(InputAction.CallbackContext context)
     {
-        _player.movement.HandleDash();
+        _player.movement.HandleDash(); // If jump + Blow HandleDash()
     }
 
     private void Pause_performed(InputAction.CallbackContext context) 

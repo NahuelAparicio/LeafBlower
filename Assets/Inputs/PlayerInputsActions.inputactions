@@ -15,15 +15,6 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "BlowerMove",
-                    "type": "Value",
-                    "id": "6d99dd18-0c1b-40ab-87bf-385e5a1641a2",
-                    "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
                     "name": "Dash",
                     "type": "Button",
                     "id": "78b74af9-2981-4a1f-a525-03ad249c03cb",
@@ -36,24 +27,6 @@
                     "name": "Jump",
                     "type": "Button",
                     "id": "0b71040d-049a-4238-912f-9dd471cad047",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Blow",
-                    "type": "Button",
-                    "id": "f8dc7d3a-0ec7-4ec2-a41a-648bd637eb90",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Aspire",
-                    "type": "Button",
-                    "id": "5916b5f9-be66-4325-89d2-778a53783913",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -76,53 +49,27 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "CameraRight",
+                    "type": "Button",
+                    "id": "99e01d71-8f71-4b7b-8771-716368784be2",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "CameraLeft",
+                    "type": "Button",
+                    "id": "e8e51fc3-ae36-417d-9d64-148a01d67311",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
-                {
-                    "name": "",
-                    "id": "8c24cbd5-32f0-4d8e-b984-7d2d9ffc4107",
-                    "path": "<Gamepad>/leftTrigger",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Controller",
-                    "action": "Aspire",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "4f9bfd18-d8d8-4037-89a7-4f599da1af6d",
-                    "path": "<Keyboard>/c",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "Aspire",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "d37ed498-0ab3-4429-96e3-833859d6f0b8",
-                    "path": "<Gamepad>/rightTrigger",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Controller",
-                    "action": "Blow",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "6e85e902-5733-4edb-ac59-bbc720fa00d9",
-                    "path": "<Keyboard>/f",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "Blow",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
                 {
                     "name": "2D Vector",
                     "id": "a23ddf2c-5cf4-4898-9537-efd7cae6fa20",
@@ -186,28 +133,6 @@
                     "processors": "",
                     "groups": "Controller",
                     "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "4ae41eaf-847a-4b0e-9558-e939e6bc3d01",
-                    "path": "<Gamepad>/rightStick",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Controller",
-                    "action": "BlowerMove",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "aee8fb54-9257-4139-8563-d5afb0f17ec0",
-                    "path": "<Mouse>/scroll",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "BlowerMove",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -296,6 +221,28 @@
                     "processors": "",
                     "groups": "Keyboard",
                     "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "28ec13e9-df60-42fb-abe5-bec8ec2252b8",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "CameraRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0abf0628-2e7d-4635-9c51-355085f221ba",
+                    "path": "<Gamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "CameraLeft",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
