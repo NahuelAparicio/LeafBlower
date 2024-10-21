@@ -10,5 +10,5 @@ public class PlayerStats : MonoBehaviour
 
     [SerializeField] private float _jumpForce;
     public float JumpForce { get { return _jumpForce; } }
-
+    //Change this to variables with modifiers
 }

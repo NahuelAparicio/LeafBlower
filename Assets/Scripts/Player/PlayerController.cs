@@ -2,21 +2,29 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public PlayerMovement movement { get; set; }
-    public PlayerStats stats { get; set; }
-    public PlayerInputs inputs { get; set; }
-    public PlayerInteractable interactable { get; set; }
-
+    private PlayerMovement _movement;
+    private PlayerStats _stats;
+    private PlayerInputs _inputs;
+    [SerializeField] private PlayerInteractable _interactable;
+    [SerializeField] private CheckGround _checkGround;
     private Rigidbody _rb;
 
-    public Rigidbody Rigidbody { get {  return _rb; } }
+    public PlayerMovement Movement => _movement;
+    public PlayerInputs Inputs => _inputs;
+    public PlayerStats Stats => _stats;
+    public PlayerInteractable Interactable => _interactable;
+    public CheckGround CheckGround => _checkGround;
+    public Rigidbody Rigidbody => _rb;
+
+    public bool isInteracting, isStuned;
 
     private void Awake()
     {
-        movement = GetComponent<PlayerMovement>();
-        stats = GetComponent<PlayerStats>();
-        inputs = GetComponent<PlayerInputs>();
-        interactable = transform.GetChild(1).GetComponent<PlayerInteractable>();
+        isStuned = false;
+        _movement = GetComponent<PlayerMovement>();
+        _stats = GetComponent<PlayerStats>();
+        _inputs = GetComponent<PlayerInputs>();
+        _rb = GetComponent<Rigidbody>();
     }
 
     void Start()
@@ -27,5 +35,10 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         
+    }
+    private void FixedUpdate()
+    {
+        if(!isStuned)
+            _movement.HandleAllMovement();
     }
 }
