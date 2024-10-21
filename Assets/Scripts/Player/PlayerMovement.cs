@@ -46,7 +46,7 @@ public class PlayerMovement : MonoBehaviour
             HandleAirMovement();
         }
 
-        if(_player.isInteracting || _isJumping)
+        if(_player.isInteracting || _isJumping ||!_player.CheckGround.IsGrounded)
         {
             return;
         }
@@ -57,16 +57,19 @@ public class PlayerMovement : MonoBehaviour
     {
         _moveDirection = GetDirectionNormalized();
         Vector3 directionMove = _moveDirection * _player.Stats.Speed;
+
+
+
+        //Vector3 velocityHorizontal = new Vector3(_player.Rigidbody.velocity.x, 0f, _player.Rigidbody.velocity.z);
+
+        //if (velocityHorizontal.magnitude > _player.Stats.MaxAirSpeed)
+        //{
+        //    velocityHorizontal = velocityHorizontal.normalized * _player.Stats.MaxAirSpeed;
+        //    newVelocity = new Vector3(limitedVelocity.x, _player.Rigidbody.velocity.y, limitedVelocity.z);
+        //}
         _player.Rigidbody.velocity = new Vector3(directionMove.x, _player.Rigidbody.velocity.y, directionMove.z);
-        HandleRotation(_player.Stats.Speed);
+        HandleRotation(_player.Stats.MaxAirSpeed);
 
-        Vector3 velocity = new Vector3(_player.Rigidbody.velocity.x, 0f, _player.Rigidbody.velocity.z);
-
-        if (velocity.magnitude > _player.Stats.Speed)
-        {
-            Vector3 limitedVelocity = velocity.normalized * _player.Stats.Speed;
-            _player.Rigidbody.velocity = new Vector3(limitedVelocity.x, _player.Rigidbody.velocity.y, limitedVelocity.z);
-        }
     }
 
     private void HandleRotation(float speed)
@@ -87,18 +90,15 @@ public class PlayerMovement : MonoBehaviour
         _moveDirection = GetDirectionNormalized();
         _moveDirection.y = 0;
 
+        Vector3 targetVelocity = _moveDirection * _player.Stats.Speed;
+
         if(OnSlope())
         {
-            _player.Rigidbody.velocity = GetSlopeMoveDirection(_moveDirection) * _player.Stats.Speed;
-            if(_player.Rigidbody.velocity.magnitude > _player.Stats.Speed)
-            {
-                _player.Rigidbody.velocity = _player.Rigidbody.velocity.normalized * _player.Stats.Speed;
-            }
+            targetVelocity = GetSlopeMoveDirection(_moveDirection) * _player.Stats.Speed;
         }
-        else if(_player.CheckGround.IsGrounded)
-        {
-            _player.Rigidbody.velocity = _moveDirection * _player.Stats.Speed;
-        }
+
+        _player.Rigidbody.MovePosition(_player.Rigidbody.position + targetVelocity * Time.deltaTime); // Interpolates Between current Velocity and target Velocity
+
         HandleRotation(rotationSpeed);
     }
 
@@ -122,14 +122,14 @@ public class PlayerMovement : MonoBehaviour
         if(_player.CheckGround.IsGrounded && !_isJumping)
         {
             _targetPosition = transform.position;
-            _targetPosition.y = _player.CheckGround.GetGroundHitPoint().y + 1f; // + playerheight
+            _targetPosition.y = _player.CheckGround.GetGroundHitPoint().y; // + playerheight
             if(_player.isInteracting || _player.Inputs.GetMoveDirection().magnitude > 0)
             {
-                transform.position = Vector3.Lerp(transform.position, _targetPosition, Time.deltaTime / 0.1f);
+                _player.Rigidbody.MovePosition(Vector3.Lerp(transform.position, _targetPosition, Time.deltaTime / 0.1f));
             }
             else
             {
-                transform.position = _targetPosition;
+                _player.Rigidbody.MovePosition(_targetPosition);
             }
         }
     }
@@ -137,7 +137,8 @@ public class PlayerMovement : MonoBehaviour
     private void ApplyGravity()
     {
         Vector3 gravityVector = Vector3.up * gravity * Time.deltaTime;
-        _player.Rigidbody.AddForce(gravityVector, ForceMode.Acceleration);
+        _player.Rigidbody.velocity += Vector3.up * gravity * Time.deltaTime;
+        //_player.Rigidbody.AddForce(gravityVector, ForceMode.Acceleration);
     }
 
     public void HandleJumping()
